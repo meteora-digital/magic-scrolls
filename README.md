@@ -1,10 +1,10 @@
-# Magic Scrolls
+# 🧙‍♀️ Magic Scrolls 📜
 
 An easy to use scroll based tweening class.
-Any element can be tweened by a percentage based on how far through the chosen parent element we have scrolled.
+Any element can be tweened by a percentage based on how far through the chosen element we have scrolled.
 The class will handle the tweening, you do the rest!
 
-## Installation
+## 🪄 Installation
 
 with webpack
 
@@ -12,11 +12,11 @@ with webpack
 yarn add magic-scrolls
 ```
 
-## Usage
+## 🧪 Usage
 
 ```html
 <section class="banner">
-	<h1 class="banner__text">This text will be tweened when the user scrolls!</h1>
+	<h1 class="banner__text">Magic Text!</h1>
 </section>
 ```
 
@@ -36,7 +36,7 @@ magic.push(text, (percentage) => {
 });
 ```
 
-## Options
+## ⚗️ Options
 
 ```es6
 new MagicScrolls(document.querySelector('selector'), {
@@ -45,12 +45,11 @@ new MagicScrolls(document.querySelector('selector'), {
 });
 ```
 
-## Options
-
 | Option | Type | Description |
 |--------|------|-------------|
 | duration | number | number in milliseconds for how long the transition should take to complete | 
 | fps | number | The frames per second for the animation | 
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
