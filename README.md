@@ -37,7 +37,7 @@ const image = document.querySelector('.banner__image');
 | fps | number | The frames per second for the animation | 
 
 ```javascript
-const magic = new MagicScrolls(banner), {
+const magic = new MagicScrolls(banner, {
 	duration: 500,
 	fps: 60,
 });
