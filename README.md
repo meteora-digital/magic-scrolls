@@ -71,6 +71,7 @@ Parallax is a powerful spell which will move your elements for you.
 		height: 130%;
 	}
 }
+```
 
 ```javascript
 magic.parallax(image);
