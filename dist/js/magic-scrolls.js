@@ -52,7 +52,7 @@ var MagicScrolls = /*#__PURE__*/function () {
 
     (0, _meteora.attach)(window, 'resize', function () {
       return _this.update();
-    }), 1000; // On scroll begin the tween
+    }), 1000; // On scroll begin the magic
 
     (0, _meteora.attach)(window, 'scroll', function () {
       return _this.enable();
@@ -60,11 +60,19 @@ var MagicScrolls = /*#__PURE__*/function () {
   }
 
   _createClass(MagicScrolls, [{
-    key: "push",
-    value: function push(element) {
+    key: "tween",
+    value: function tween(element) {
       var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      // Add a new element to the tween
-      if (element && element.nodeType) this.elements.push(new ScrollElement(element, func)); // Enable tweening
+      // Add a new element to the animation
+      if (element && element.nodeType) this.elements.push(new TweenElement(element, func)); // Enable magic
+
+      this.enable();
+    }
+  }, {
+    key: "parallax",
+    value: function parallax(element) {
+      // Add a new element to the animation
+      if (element && element.nodeType) this.elements.push(new ParallaxElement(element, this.section)); // Enable magic
 
       this.enable();
     }
@@ -82,19 +90,19 @@ var MagicScrolls = /*#__PURE__*/function () {
         // Enable all the elements
         this.elements.forEach(function (element) {
           return element.enabled = true;
-        }); // If the tween is disabled
+        }); // If the magic is disabled
 
         if (this.enabled == false) {
           // Enabled it
           this.enabled = true; // Call the function
 
-          this.tween();
+          this.animate();
         }
       }
     }
   }, {
-    key: "tween",
-    value: function tween() {
+    key: "animate",
+    value: function animate() {
       var _this2 = this;
 
       // Check if the tween should be enabled (should only function if there are any moving elements);
@@ -119,8 +127,7 @@ var MagicScrolls = /*#__PURE__*/function () {
               // Move the element.percentage by a fraction based on our animation duration
               element.percentage -= Math.round((element.percentage - _this2.scroll) / _this2.time.interval * 100) / 100; // Call the element's function
 
-              element.tween(); // element.node.style.transform = `translate3d(0, ${element.percentage * element.settings.scale}%, 0)`;
-              // Check if the element has moved to the appropriate position
+              element.tween(); // Check if the element has moved to the appropriate position
 
               if (Math.round(element.percentage) == _this2.scroll) element.enabled = false;
             }
@@ -131,7 +138,7 @@ var MagicScrolls = /*#__PURE__*/function () {
 
 
         window.requestAnimationFrame(function () {
-          return _this2.tween();
+          return _this2.animate();
         });
       }
     }
@@ -142,19 +149,18 @@ var MagicScrolls = /*#__PURE__*/function () {
 
 exports["default"] = MagicScrolls;
 
-var ScrollElement = /*#__PURE__*/function () {
-  function ScrollElement(element) {
+var TweenElement = /*#__PURE__*/function () {
+  function TweenElement(element) {
     var func = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-    _classCallCheck(this, ScrollElement);
+    _classCallCheck(this, TweenElement);
 
-    this.node = element;
     this.enabled = true;
     this.percentage = 0;
     this.func = func;
   }
 
-  _createClass(ScrollElement, [{
+  _createClass(TweenElement, [{
     key: "tween",
     value: function tween() {
       // Call the function and pass in the element percentage
@@ -162,5 +168,27 @@ var ScrollElement = /*#__PURE__*/function () {
     }
   }]);
 
-  return ScrollElement;
+  return TweenElement;
+}();
+
+var ParallaxElement = /*#__PURE__*/function () {
+  function ParallaxElement(element, section) {
+    _classCallCheck(this, ParallaxElement);
+
+    this.section = section;
+    this.element = element;
+    this.enabled = true;
+    this.percentage = 0;
+    this.parallax = 0;
+  }
+
+  _createClass(ParallaxElement, [{
+    key: "tween",
+    value: function tween() {
+      this.parallax = (this.section.clientHeight - this.element.clientHeight) / this.element.clientHeight * -(this.percentage - 100);
+      this.element.style.transform = "translateY(".concat(this.parallax.toFixed(2), "%)");
+    }
+  }]);
+
+  return ParallaxElement;
 }();

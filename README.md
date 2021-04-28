@@ -16,40 +16,65 @@ yarn add magic-scrolls
 
 ```html
 <section class="banner">
-	<h1 class="banner__text">Magic Text!</h1>
+	<div class="banner__image" style="background-image: url('path/to/your/image.jpg');"></div>
 </section>
 ```
 
-```es6
+```javascript
 import MagicScrolls from 'magic-scrolls';
 
 const banner = document.querySelector('.banner');
-const text = document.querySelector('.banner__text');
-
-const magic = new MagicScrolls(banner, {
-	duration: 500,
-	fps: 60,
-});
-
-magic.push(text, (percentage) => {
-	text.style.transform = `translateX(${percentage}%)`;
-});
+const image = document.querySelector('.banner__image');
 ```
 
-## ⚗️ Options
+## ⚗️ The Magic
 
-```es6
-new MagicScrolls(document.querySelector('selector'), {
-	duration: 500,
-	fps: 60,
-});
-```
+#### Create a Magic Scroll!
 
 | Option | Type | Description |
 |--------|------|-------------|
-| duration | number | number in milliseconds for how long the transition should take to complete | 
+| duration | number | number in milliseconds for how long the tween should take to complete | 
 | fps | number | The frames per second for the animation | 
 
+```javascript
+const magic = new MagicScrolls(banner), {
+	duration: 500,
+	fps: 60,
+});
+```
+
+#### Tweening
+
+Use tweening to smoothly animate an element's styles based on your scroll position within the Magic Scroll element!
+
+```javascript
+magic.tween(image, (percentage) => {
+	image.style.transform = `translateX(${percentage}%)`;
+});
+```
+
+#### Parallax
+
+Parallax is a powerful spell which will move your elements for you.
+
+```scss
+.banner {
+	position: relative;
+	height: 1000px;
+	overflow: hidden;
+
+	&__image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 130%;
+	}
+}
+
+```javascript
+magic.parallax(image);
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

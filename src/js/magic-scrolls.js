@@ -37,14 +37,21 @@ export default class MagicScrolls {
 
     // On resize we need to change our offset
     attach(window, 'resize', () => this.update()), 1000;
-    // On scroll begin the tween
+    // On scroll begin the magic
     attach(window, 'scroll', () => this.enable(), 50);
   }
 
-  push(element, func = false) {
-    // Add a new element to the tween
-    if (element && element.nodeType) this.elements.push(new ScrollElement(element, func));
-    // Enable tweening
+  tween(element, func = false) {
+    // Add a new element to the animation
+    if (element && element.nodeType) this.elements.push(new TweenElement(element, func));
+    // Enable magic
+    this.enable();
+  }
+
+  parallax(element) {
+    // Add a new element to the animation
+    if (element && element.nodeType) this.elements.push(new ParallaxElement(element, this.section));
+    // Enable magic
     this.enable();
   }
 
@@ -58,17 +65,17 @@ export default class MagicScrolls {
     if (this.elements.length) {
       // Enable all the elements
       this.elements.forEach((element) => element.enabled = true);
-      // If the tween is disabled
+      // If the magic is disabled
       if (this.enabled == false) {
         // Enabled it
         this.enabled = true;
         // Call the function
-        this.tween();
+        this.animate();
       }
     }
   }
 
-  tween() {
+  animate() {
     // Check if the tween should be enabled (should only function if there are any moving elements);
     this.enabled = (this.elements.filter((el) => el.enabled).length) ? true : false;
     // If it is enabled
@@ -90,21 +97,19 @@ export default class MagicScrolls {
             element.percentage -= Math.round(((element.percentage - this.scroll) / (this.time.interval)) * 100) / 100;
             // Call the element's function
             element.tween();
-            // element.node.style.transform = `translate3d(0, ${element.percentage * element.settings.scale}%, 0)`;
             // Check if the element has moved to the appropriate position
             if (Math.round(element.percentage) == this.scroll) element.enabled = false;
           };
         });
       }
       // Call the function again
-      window.requestAnimationFrame(() => this.tween());
+      window.requestAnimationFrame(() => this.animate());
     }
   }
 }
 
-class ScrollElement {
+class TweenElement {
   constructor(element, func = false) {
-    this.node = element;
     this.enabled = true;
     this.percentage = 0;
     this.func = func;
@@ -113,5 +118,20 @@ class ScrollElement {
   tween() {
     // Call the function and pass in the element percentage
     if (this.func && typeof this.func) this.func(this.percentage);
+  }
+}
+
+class ParallaxElement {
+  constructor(element, section) {
+    this.section = section;
+    this.element = element;
+    this.enabled = true;
+    this.percentage = 0;
+    this.parallax = 0;
+  }
+
+  tween() {
+    this.parallax = (this.section.clientHeight - this.element.clientHeight) / this.element.clientHeight * -(this.percentage - 100);
+    this.element.style.transform = `translateY(${this.parallax.toFixed(2)}%)`;
   }
 }
