@@ -6,6 +6,10 @@
   "scripts": {
     "test": "npm i && gulp"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meteora-digital/magic-scroll.git"
+  },
   "keywords": [
     "JavaScript",
     "es6",
@@ -16,6 +20,9 @@
   ],
   "author": "Emmanuel Davies",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meteora-digital/magic-scroll/issues"
+  },
   "dependencies": {
     "meteora": "latest"
   },
@@ -25,5 +32,6 @@
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-plumber": "^1.2.1"
-  }
+  },
+  "homepage": "https://github.com/meteora-digital/magic-scroll#readme"
 }
