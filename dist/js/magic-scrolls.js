@@ -47,7 +47,7 @@ var MagicScrolls = /*#__PURE__*/function () {
       previous: null,
       current: null,
       elapsed: null,
-      interval: this.settings.duration / this.settings.fps
+      interval: 1000 / this.settings.fps
     }; // On resize we need to change our offset
 
     (0, _meteora.attach)(window, 'resize', function () {
@@ -117,7 +117,7 @@ var MagicScrolls = /*#__PURE__*/function () {
         this.time.current = Date.now();
         this.time.elapsed = this.time.current - this.time.previous; // If the time is right
 
-        if (this.time.elapsed >= this.time.interval) {
+        if (this.time.elapsed >= this.time.interval * this.settings.duration / 1000) {
           // More FPS maths
           this.time.previous = this.time.current - this.time.elapsed % this.time.interval; // Loop our elements
 
@@ -125,7 +125,7 @@ var MagicScrolls = /*#__PURE__*/function () {
             // If the element enabled / still needs to move
             if (element.enabled) {
               // Move the element.percentage by a fraction based on our animation duration
-              element.percentage -= Math.round((element.percentage - _this2.scroll) / _this2.time.interval * 100) / 100; // Call the element's function
+              element.percentage -= Math.round((element.percentage - _this2.scroll) / (_this2.time.interval * _this2.settings.duration / 1000) * 100) / 100; // Call the element's function
 
               element.tween(); // Check if the element has moved to the appropriate position
 
