@@ -85,6 +85,12 @@ export default class MagicScrolls {
       // Some FPS maths
       this.time.current = Date.now();
       this.time.elapsed = this.time.current - this.time.previous;
+      
+      // Move the element.percentage by a fraction based on our animation duration
+      this.elements.forEach((element) => {
+        if (element.enabled) element.percentage -= Math.round(((element.percentage - this.scroll) / (this.settings.duration / 60)) * 100) / 100;
+      });
+
       // If the time is right
       if (this.time.elapsed >= this.time.interval) {
         // More FPS maths
@@ -93,8 +99,6 @@ export default class MagicScrolls {
         this.elements.forEach((element) => {
           // If the element enabled / still needs to move
           if (element.enabled) {
-            // Move the element.percentage by a fraction based on our animation duration
-            element.percentage -= Math.round(((element.percentage - this.scroll) / (this.time.interval)) * 100) / 100;
             // Call the element's function
             element.tween();
             // Check if the element has moved to the appropriate position

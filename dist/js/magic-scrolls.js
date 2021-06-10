@@ -115,7 +115,11 @@ var MagicScrolls = /*#__PURE__*/function () {
         this.scroll = Math.min(100, Math.max(0, Math.round((window.pageYOffset + window.innerHeight - this.offset.top) / ((window.innerHeight + this.offset.bottom) / 100)))); // Some FPS maths
 
         this.time.current = Date.now();
-        this.time.elapsed = this.time.current - this.time.previous; // If the time is right
+        this.time.elapsed = this.time.current - this.time.previous; // Move the element.percentage by a fraction based on our animation duration
+
+        this.elements.forEach(function (element) {
+          if (element.enabled) element.percentage -= Math.round((element.percentage - _this2.scroll) / (_this2.settings.duration / 60) * 100) / 100;
+        }); // If the time is right
 
         if (this.time.elapsed >= this.time.interval) {
           // More FPS maths
@@ -124,9 +128,7 @@ var MagicScrolls = /*#__PURE__*/function () {
           this.elements.forEach(function (element) {
             // If the element enabled / still needs to move
             if (element.enabled) {
-              // Move the element.percentage by a fraction based on our animation duration
-              element.percentage -= Math.round((element.percentage - _this2.scroll) / _this2.time.interval * 100) / 100; // Call the element's function
-
+              // Call the element's function
               element.tween(); // Check if the element has moved to the appropriate position
 
               if (Math.round(element.percentage) == _this2.scroll) element.enabled = false;

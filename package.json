@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meteora-digital/magic-scroll.git"
+    "url": "git+https://github.com/meteora-digital/magic-scrolls.git"
   },
   "keywords": [
     "JavaScript",
@@ -21,7 +21,7 @@
   "author": "Emmanuel Davies",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/meteora-digital/magic-scroll/issues"
+    "url": "https://github.com/meteora-digital/magic-scrolls/issues"
   },
   "dependencies": {
     "meteora": "latest"
@@ -33,5 +33,5 @@
     "gulp-babel": "^8.0.0",
     "gulp-plumber": "^1.2.1"
   },
-  "homepage": "https://github.com/meteora-digital/magic-scroll#readme"
+  "homepage": "https://github.com/meteora-digital/magic-scrolls#readme"
 }
