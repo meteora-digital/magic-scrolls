@@ -7,13 +7,13 @@ The class will handle the tweening, you do the rest!
 ## 📚 Features
 
 #### Scroll Based Animations
+For simple, non scroll based tweening, check out [Tween](https://www.npmjs.com/package/@meteora-digital/tween);
 
 | Feature | Support |
 |---------|---------|
 | Tweening | ✔️ |
 | Parallax | ✔️ |
 
-###### For simple, non scroll based tweening, check out [Tween](https://www.npmjs.com/package/@meteora-digital/tween);
 
 ## 🪄 Installation
 
