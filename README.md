@@ -4,6 +4,17 @@ An easy to use scroll based tweening class.
 Any element can be tweened by a percentage based on how far through the chosen element we have scrolled.
 The class will handle the tweening, you do the rest!
 
+## 📚 Features
+
+#### Scroll Based Animations
+
+| Feature | Support |
+|---------|---------|
+| Tweening | ✔️ |
+| Parallax | ✔️ |
+
+###### For simple, non scroll based tweening, check out [Tween](https://www.npmjs.com/package/@meteora-digital/tween);
+
 ## 🪄 Installation
 
 with webpack
@@ -56,6 +67,9 @@ magic.tween(image, (percentage) => {
 #### Parallax
 
 Parallax is a powerful spell which will move your elements for you.
+
+The image will move precisely within the parent element as a percentage of it's height within the container.
+You will never see white space and can control the movement simply by changing it's height.
 
 ```scss
 .banner {

@@ -88,7 +88,7 @@ export default class MagicScrolls {
       
       // Move the element.percentage by a fraction based on our animation duration
       this.elements.forEach((element) => {
-        if (element.enabled) element.percentage -= Math.round(((element.percentage - this.scroll) / (this.settings.duration / 60)) * 100) / 100;
+        if (element.enabled) element.percentage -= Math.round(((element.percentage - this.scroll) / (this.settings.duration / 100)) * 100) / 100;
       });
 
       // If the time is right
