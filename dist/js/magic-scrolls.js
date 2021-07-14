@@ -118,7 +118,7 @@ var MagicScrolls = /*#__PURE__*/function () {
         this.time.elapsed = this.time.current - this.time.previous; // Move the element.percentage by a fraction based on our animation duration
 
         this.elements.forEach(function (element) {
-          if (element.enabled) element.percentage -= Math.round((element.percentage - _this2.scroll) / (_this2.settings.duration / 60) * 100) / 100;
+          if (element.enabled) element.percentage -= Math.round((element.percentage - _this2.scroll) / (_this2.settings.duration / 100) * 100) / 100;
         }); // If the time is right
 
         if (this.time.elapsed >= this.time.interval) {
