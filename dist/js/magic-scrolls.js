@@ -79,8 +79,7 @@ var MagicScrolls = /*#__PURE__*/function () {
   }, {
     key: "update",
     value: function update() {
-      this.offset.top = (0, _meteora.offset)(this.section).y;
-      this.offset.bottom = this.offset.top + this.section.clientHeight;
+      this.offset = (0, _meteora.offset)(this.section).y;
     }
   }, {
     key: "enable",
@@ -112,7 +111,7 @@ var MagicScrolls = /*#__PURE__*/function () {
 
       if (this.enabled) {
         // Get the percentage we have scrolled through the container
-        this.scroll = Math.min(100, Math.max(0, Math.round((window.pageYOffset + window.innerHeight - this.offset.top) / ((window.innerHeight + this.offset.bottom) / 100)))); // Some FPS maths
+        this.scroll = Math.min(100, Math.max(0, Math.round((window.pageYOffset + window.innerHeight - this.offset) / ((window.innerHeight + this.section.clientHeight) / 100)))); // Some FPS maths
 
         this.time.current = Date.now();
         this.time.elapsed = this.time.current - this.time.previous; // Move the element.percentage by a fraction based on our animation duration
@@ -157,6 +156,7 @@ var TweenElement = /*#__PURE__*/function () {
 
     _classCallCheck(this, TweenElement);
 
+    this.element = element;
     this.enabled = true;
     this.percentage = 0;
     this.func = func;

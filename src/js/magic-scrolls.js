@@ -56,8 +56,7 @@ export default class MagicScrolls {
   }
 
   update() {
-    this.offset.top = offset(this.section).y;
-    this.offset.bottom = this.offset.top + this.section.clientHeight;
+    this.offset = offset(this.section).y;
   }
 
   enable() {
@@ -81,7 +80,7 @@ export default class MagicScrolls {
     // If it is enabled
     if (this.enabled) {
       // Get the percentage we have scrolled through the container
-      this.scroll = Math.min(100, Math.max(0, Math.round(((window.pageYOffset + window.innerHeight) - this.offset.top) / ((window.innerHeight + this.offset.bottom) / 100))));
+      this.scroll = Math.min(100, Math.max(0, Math.round(((window.pageYOffset + window.innerHeight) - this.offset) / ((window.innerHeight + this.section.clientHeight) / 100))));
       // Some FPS maths
       this.time.current = Date.now();
       this.time.elapsed = this.time.current - this.time.previous;
@@ -114,6 +113,7 @@ export default class MagicScrolls {
 
 class TweenElement {
   constructor(element, func = false) {
+    this.element = element;
     this.enabled = true;
     this.percentage = 0;
     this.func = func;
